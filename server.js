@@ -1,62 +1,25 @@
 //dependencia commontjs
 const express  = require('express');
+//const dotenv = require('dontev')
+const colors = require('colors')
+// dependecias de las rutas
+const bootcampRoutes = require('./routes/bootcampRoutes.js')
+// dependecia de la conexion a la base de datos
+const conectDB = require('./config/db.js')
+conectDB()
+
 //crear objeto app
 const app = express();
+
+//Dependencia para recibir datos JSON
+app.use(express.json())
+
+app.use('/Api/v1/devcamp/bootcamps', bootcampRoutes)
 
 //PRUEBA DE URL DEL SERVIDOR
 app.get('/prueba',function(request, response){
     response.send("Hello Word");
 });
-
-//                              URI BOTCAMPS
-
-//LISTAR TODOS
-app.get('/Api/v1/devcamp/bootcamps',(request,response)=>{
-    response
-    .status(200)
-    .json({
-        "sucess": true,
-        "msg": "mostrar todos los bootcamps"
-    })
-});
-//LISTAR ID
-app.get('/Api/v1/devcamp/bootcamps/:id',(request,response)=>{
-    response
-    .status(200)
-    .json({
-        "sucess": true,
-        "msg": `Seleccionado el boocamp con id: ${request.params.id}`
-    })
-});
-
-//ENVIAR DATO
-app.post('/Api/v1/devcamp/bootcamps',(request,response)=>{
-    response
-    .status(201)
-    .json({
-        "sucess": true,
-        "msg": "crear bootcamps"
-    })
-});
-//ACTUALIZAR DATO POR ID 
-app.put('/Api/v1/devcamp/bootcamps/:id',(request,response)=>{
-    response
-    .status(200)
-    .json({
-        "sucess": true,
-        "msg": `Actualizando el boocamp con id: ${request.params.id}`
-    })
-});
-//ELIMINAR DATO POR ID 
-app.delete('/Api/v1/devcamp/bootcamps/:id',(request,response)=>{
-    response
-    .status(200)
-    .json({
-        "sucess": true,
-        "msg": `eliminado el boocamp con id: ${request.params.id}`
-    })
-});
-
 
 
 
@@ -214,4 +177,4 @@ app.delete('/Api/v1/devcamp/users/:id',(request,response)=>{
 //Establecer servidor 
 const puerto = 4500
 app.listen(puerto,
-    console.log("SERVIDOR ESCUCHANDO EL PUERTO: "+puerto))
+    console.log(`SERVIDOR ESCUCHANDO EL PUERTO: ${puerto}`.bgBlue.green))
