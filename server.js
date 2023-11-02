@@ -6,7 +6,7 @@ const colors = require('colors')
 const bootcampRoutes = require('./routes/bootcampRoutes.js')
 // dependecia de la conexion a la base de datos
 const conectDB = require('./config/db.js')
-conectDB()
+ conectDB()
 
 //crear objeto app
 const app = express();
@@ -14,14 +14,14 @@ const app = express();
 //Dependencia para recibir datos JSON
 app.use(express.json())
 
-app.use('/Api/v1/devcamp/bootcamps', bootcampRoutes)
+app.use('/api/v1/devcamp/bootcamps',bootcampRoutes)
+
+
 
 //PRUEBA DE URL DEL SERVIDOR
 app.get('/prueba',function(request, response){
     response.send("Hello Word");
 });
-
-
 
 //                              URI COURSES
 
